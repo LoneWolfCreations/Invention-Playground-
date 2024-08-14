@@ -154,13 +154,61 @@
         .footer-rights {
             font-size: 14px;
         }
-        /* Shadow effect for panels */
-        .container, .download-panel {
+        .slider-container {
+            position: relative;
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
         }
-        /* Dark mode shadows */
-        .dark-mode .container, .dark-mode .download-panel {
+        .slider {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+        .slider-image {
+            width: 100%;
+            border-radius: 8px;
+        }
+        .slider-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(0, 0, 0, 0.5);
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 24px;
+            padding: 10px;
+            z-index: 1;
+            transition: background 0.3s;
+        }
+        .slider-btn:hover {
+            background: rgba(0, 0, 0, 0.7);
+        }
+        .prev {
+            left: 10px;
+        }
+        .next {
+            right: 10px;
+        }
+        .maintenance {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        .maintenance.dark-mode {
+            background: #444;
+            color: #ddd;
         }
     </style>
 </head>
@@ -168,10 +216,23 @@
     <header>
         <h1>Invention Playground</h1>
     </header>
+    <div class="maintenance" id="maintenanceMessage">
+        <h2>Ой, похоже на сайте ведутся работы. Зайдите позже.</h2>
+    </div>
     <div class="container">
         <h2>Добро пожаловать в Invention Playground!</h2>
         <p>Invention Playground - Это песочница с множеством карт и предметами. В этой игре можно делать всё, что угодно. Ограничения? Их НЕТ, ну только если твоя фантазия. Строй, ломай, убивай, играй. Делай всё что хочешь, но не нарушай политику конфиденциальности.</p>
         <a href="#" class="button" onclick="showDownloadPanel()">Скачать</a>
+        <!-- Slider Section -->
+        <div class="slider-container">
+            <div class="slider">
+                <img src="s1.jpg" alt="Image 1" class="slider-image">
+                <img src="s2.jpg" alt="Image 2" class="slider-image">
+                <img src="s3.jpg" alt="Image 3" class="slider-image">
+            </div>
+            <button class="slider-btn prev" onclick="moveSlide(-1)">&#10094;</button>
+            <button class="slider-btn next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
     </div>
     <div class="download-panel" id="downloadPanel">
         <h3>Выберите платформу для загрузки:</h3>
@@ -186,12 +247,24 @@
         <div class="footer-rights">© 2024 Все права защищены</div>
     </div>
     <script>
+        const maintenanceMode = false; // Установите в true, чтобы включить режим обслуживания
+
+        // Проверка режима обслуживания
+        if (maintenanceMode) {
+            document.body.style.display = 'none';
+            document.getElementById('maintenanceMessage').style.display = 'block';
+        }
+
+        let currentSlide = 0;
+
         function toggleTheme() {
             const body = document.body;
             const themeToggle = document.getElementById('themeToggle');
             const downloadPanel = document.getElementById('downloadPanel');
+            const maintenanceMessage = document.getElementById('maintenanceMessage');
             body.classList.toggle('dark-mode');
             downloadPanel.classList.toggle('dark-mode');
+            maintenanceMessage.classList.toggle('dark-mode');
             if (body.classList.contains('dark-mode')) {
                 themeToggle.classList.remove('sunny');
                 themeToggle.classList.add('moon');
@@ -210,7 +283,14 @@
         function hideDownloadPanel() {
             document.getElementById('downloadPanel').style.display = 'none';
         }
+
+        function moveSlide(step) {
+            const slides = document.querySelector('.slider');
+            const totalSlides = document.querySelectorAll('.slider-image').length;
+            currentSlide = (currentSlide + step + totalSlides) % totalSlides;
+            const slideWidth = document.querySelector('.slider-image').clientWidth;
+            slides.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+        }
     </script>
 </body>
 </html>
-
