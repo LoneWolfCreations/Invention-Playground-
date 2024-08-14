@@ -1,0 +1,35 @@
+name: Deploy GitHub Pages
+
+on:
+  push:
+    branches:
+      - main  # Замените на вашу основную ветку
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Setup Pages
+        uses: actions/setup-pages@v1
+
+      - name: Build and Deploy
+        run: |
+          # Скомпилируйте ваш сайт (например, с помощью Jekyll, Hugo и т.д.)
+          # Или просто скопируйте файлы в папку public
+          mkdir -p public
+          cp -r * public
+          mv public ../public
+      - name: Upload to GitHub Pages
+        uses: actions/upload-pages-artifact@v1
+
+deploy:
+  needs: build
+  runs-on: ubuntu-latest
+  steps:
+    - name: Deploy to GitHub Pages
+      uses: actions/deploy-pages@v1
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
