@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Политика конфиденциальности</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .dark-mode .container {
+            background: #444;
+            color: #ddd;
+        }
+        h1, h2 {
+            color: #4ea4cf;
+        }
+        .dark-mode h1, .dark-mode h2 {
+            color: #295266;
+        }
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #4ea4cf;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 24px;
+            z-index: 10;
+        }
+        .theme-toggle.sunny {
+            background: #ffeb3b;
+            color: #333;
+        }
+        .theme-toggle.moon {
+            background: #333;
+            color: #ffeb3b;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Политика конфиденциальности</h1>
+        <p>Ваша конфиденциальность важна для нас. Мы собираем и используем информацию о пользователях нашего сайта только в тех случаях, когда это необходимо для предоставления наших услуг. Мы не передаем ваши данные третьим лицам без вашего согласия.</p>
+        <h2>Возрастные ограничения</h2>
+        <p>Игра "Invention Playground" предназначена для пользователей старше 16 лет. В игре могут присутствовать сцены жестокого характера. Пожалуйста, убедитесь, что вы соответствуете этому требованию перед началом игры.</p>
+        <h2>Сбор данных</h2>
+        <p>Мы собираем минимальное количество данных, необходимое для функционирования игры. Это может включать технические данные, такие как IP-адрес и информация об устройстве.</p>
+        <h2>Использование данных</h2>
+        <p>Собранные данные используются для улучшения качества игры и пользовательского опыта. Мы не используем ваши данные для целей, не связанных с игрой.</p>
+        <h2>Контактная информация</h2>
+        <p>Если у вас есть вопросы о нашей политике конфиденциальности, пожалуйста, свяжитесь с нами через контактную форму на сайте.</p>
+        <button class="theme-toggle sunny" id="themeToggle" onclick="toggleTheme()">☀️</button>
+    </div>
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('dark-mode');
+            const themeToggle = document.getElementById('themeToggle');
+            if (document.body.classList.contains('dark-mode')) {
+                themeToggle.classList.remove('sunny');
+                themeToggle.classList.add('moon');
+                themeToggle.textContent = '🌙';
+            } else {
+                themeToggle.classList.remove('moon');
+                themeToggle.classList.add('sunny');
+                themeToggle.textContent = '☀️';
+            }
+        }
+    </script>
+</body>
+</html>
+

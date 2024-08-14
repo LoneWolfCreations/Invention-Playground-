@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invention Playground</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+            color: #333;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        header {
+            background: #4ea4cf;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: relative;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            margin: 0;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            padding: 20px;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            background: #4ea4cf;
+            color: #fff;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 10px 0;
+        }
+        .button:hover {
+            background: #3b8b9e;
+        }
+        .dark-mode {
+            background-color: #333;
+            color: #ddd;
+        }
+        .dark-mode header {
+            background: #295266;
+        }
+        .dark-mode .container {
+            background: #444;
+            color: #ddd;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+        .dark-mode .button {
+            background: #295266;
+            color: #fff;
+        }
+        .dark-mode .button:hover {
+            background: #1e3a4f;
+        }
+        .theme-toggle {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 50px;
+            height: 50px;
+            background: #4ea4cf;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            font-size: 24px;
+            z-index: 10;
+            transition: background-color 0.3s;
+        }
+        .theme-toggle:hover {
+            background: #3b8b9e;
+        }
+        .theme-toggle.sunny {
+            background: #ffeb3b;
+            color: #333;
+        }
+        .theme-toggle.moon {
+            background: #333;
+            color: #ffeb3b;
+        }
+        .download-panel {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        .download-panel.dark-mode {
+            background: #444;
+            color: #ddd;
+        }
+        .download-panel button {
+            margin: 10px;
+            padding: 10px 20px;
+            background: #4ea4cf;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .download-panel button:hover {
+            background: #3b8b9e;
+        }
+        .download-panel .close-btn {
+            background: #f44336;
+        }
+        .download-panel .close-btn:hover {
+            background: #d32f2f;
+        }
+        .footer {
+            background: #4ea4cf;
+            color: #fff;
+            padding: 20px;
+            text-align: center;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        .policy-page {
+            padding: 20px;
+        }
+        .policy-page h2 {
+            margin-top: 0;
+        }
+        .footer-rights {
+            font-size: 14px;
+        }
+        /* Shadow effect for panels */
+        .container, .download-panel {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        /* Dark mode shadows */
+        .dark-mode .container, .dark-mode .download-panel {
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Invention Playground</h1>
+    </header>
+    <div class="container">
+        <h2>Добро пожаловать в Invention Playground!</h2>
+        <p>Invention Playground - Это песочница с множеством карт и предметами. В этой игре можно делать всё, что угодно. Ограничения? Их НЕТ, ну только если твоя фантазия. Строй, ломай, убивай, играй. Делай всё что хочешь, но не нарушай политику конфиденциальности.</p>
+        <a href="#" class="button" onclick="showDownloadPanel()">Скачать</a>
+    </div>
+    <div class="download-panel" id="downloadPanel">
+        <h3>Выберите платформу для загрузки:</h3>
+        <a href="path/to/your/windows-installer.exe" class="button">Windows</a>
+        <a href="https://github.com/Maximka2288118/Invention-Playground/releases/download/Game/Invention.Playground.apk" class="button">Android</a>
+        <br>
+        <button class="close-btn" onclick="hideDownloadPanel()">Закрыть</button>
+    </div>
+    <button class="theme-toggle sunny" id="themeToggle" onclick="toggleTheme()">☀️</button>
+    <div class="footer">
+        <a href="policy.html">Политика конфиденциальности</a>
+        <div class="footer-rights">© 2024 Все права защищены</div>
+    </div>
+    <script>
+        function toggleTheme() {
+            const body = document.body;
+            const themeToggle = document.getElementById('themeToggle');
+            const downloadPanel = document.getElementById('downloadPanel');
+            body.classList.toggle('dark-mode');
+            downloadPanel.classList.toggle('dark-mode');
+            if (body.classList.contains('dark-mode')) {
+                themeToggle.classList.remove('sunny');
+                themeToggle.classList.add('moon');
+                themeToggle.textContent = '🌙';
+            } else {
+                themeToggle.classList.remove('moon');
+                themeToggle.classList.add('sunny');
+                themeToggle.textContent = '☀️';
+            }
+        }
+
+        function showDownloadPanel() {
+            document.getElementById('downloadPanel').style.display = 'block';
+        }
+
+        function hideDownloadPanel() {
+            document.getElementById('downloadPanel').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+
